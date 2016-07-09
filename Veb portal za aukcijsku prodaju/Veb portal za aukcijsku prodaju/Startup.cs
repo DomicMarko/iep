@@ -8,6 +8,7 @@ namespace Veb_portal_za_aukcijsku_prodaju
     {
         public void Configuration(IAppBuilder app)
         {
+            app.MapSignalR();
             ConfigureAuth(app);
         }
     }

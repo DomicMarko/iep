@@ -29,6 +29,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 
             using (var context = new AukcijaEntities())
             {
+
                 ViewBag.CurrentSort = sortOrder;
                 ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
                 ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
@@ -116,6 +117,19 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                         break;
                 }
 
+     //           IEnumerable<Veb_portal_za_aukcijsku_prodaju.Models.Authentication.PreviewAuction> aukcijasForPreview = new IEnumerable<Veb_portal_za_aukcijsku_prodaju.Models.Authentication.PreviewAuction>();
+                
+                foreach(Aukcija auk in aukcijas)
+                {
+                    if(auk.BidID != null)
+                    {
+                        Bid bid = context.Bids.Find(auk.BidID);
+                        Korisnik user = context.Korisniks.Find(bid.KorisnikID);
+
+                        bid.Korisnik = user;
+                        auk.Bid = bid;
+                    }
+                }                            
 
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);

@@ -70,3 +70,7 @@ D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb 
 D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\obj\Release\Veb portal za aukcijsku prodaju.dll
 D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\obj\Release\Veb portal za aukcijsku prodaju.pdb
 D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\obj\Release\Veb portal za aukcijsku prodaju.csprojResolveAssemblyReference.cache
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

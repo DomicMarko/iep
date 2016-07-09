@@ -739,5 +739,55 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
             }
         }
         #endregion
+
+
+
+        public void BidAuction(int auctionID, int userID, out string fullUserName, out string newPrice)
+        {
+
+            try
+            {                                
+                Aukcija aukcija = null;
+                using (var context = new AukcijaEntities())
+                {
+                    aukcija = context.Aukcijas.Find(auctionID);
+                }
+
+                if(aukcija != null)
+                {
+                    double newPriceDouble = (double)aukcija.TrenutnaCena + 0.5;
+
+                    Bid newBid = new Bid()
+                    {
+                        PonCena = newPriceDouble,
+                        Vreme = DateTime.Now,
+                        KorisnikID = userID,
+                        AukcijaID = auctionID
+                    };
+
+                    using (var context = new AukcijaEntities())
+                    {
+                        context.Bids.Add(newBid);
+                        context.SaveChanges();
+
+                        Korisnik user = context.Korisniks.Find(userID);
+
+                        fullUserName = user.Ime + " " + user.Prezime;
+                        newPrice = "" + newPriceDouble;
+                    }
+
+                }
+                else
+                {
+                    fullUserName = newPrice = null;
+                }               
+            }
+            catch (FormatException)
+            {
+                fullUserName = newPrice = null;
+                Console.WriteLine("Something went wrong.");
+            }                      
+        }
+       
     }
 }

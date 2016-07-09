@@ -75,3 +75,7 @@ figure {
 .search-all {
     margin-right: 10px;
 }
+
+.aa-add-card-btn {
+    cursor: pointer;
+}
