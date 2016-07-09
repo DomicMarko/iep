@@ -1,0 +1,58 @@
+﻿@model Veb_portal_za_aukcijsku_prodaju.Models.Narudzbina
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Narudzbina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CenaPaketa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CenaPaketa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrojTokena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrojTokena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumPravljenja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumPravljenja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Korisnik.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Korisnik.Ime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.NarudzbinaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

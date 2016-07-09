@@ -1,0 +1,98 @@
+﻿@model Veb_portal_za_aukcijsku_prodaju.Models.Aukcija
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Aukcija</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Proizvod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proizvod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trajanje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trajanje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PocetnaCena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PocetnaCena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VremeKreiranja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VremeKreiranja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VremeOtvaranja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VremeOtvaranja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VremeZatvaranja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VremeZatvaranja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrenutnaCena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrenutnaCena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slika)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slika)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bid.BidID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bid.BidID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AukcijaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71f80153b3604a7d8a1380d579da841f" Name="Diagram1">
+        <EntityTypeShape EntityType="AukcijaModel.Aukcija" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AukcijaModel.Bid" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AukcijaModel.Korisnik" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AukcijaModel.Narudzbina" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="AukcijaModel.R_3" ManuallyRouted="false" />
+        <AssociationConnector Association="AukcijaModel.R_4" ManuallyRouted="false" />
+        <AssociationConnector Association="AukcijaModel.R_2" ManuallyRouted="false" />
+        <AssociationConnector Association="AukcijaModel.R_1" ManuallyRouted="false" />
+        <AssociationConnector Association="AukcijaModel.Dobio" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

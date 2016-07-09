@@ -1,0 +1,230 @@
+﻿@{
+    bool cond = true;
+    bool logedinUser = false;
+    string linkTo = "Home";
+    if (Session["admin"] != null)
+    {
+        if ((bool)Session["admin"])
+        {
+            cond = false;
+            linkTo = "Admin";
+        }
+    }
+
+    if (Session["userID"] != null) 
+    {
+        logedinUser = true;    
+    }
+
+    List<SelectListItem> items = new List<SelectListItem>();
+
+    items.Add(new SelectListItem { Text = "", Value = "0", Selected = true });
+
+    items.Add(new SelectListItem { Text = "READY", Value = "1" });
+
+    items.Add(new SelectListItem { Text = "OPEN", Value = "2" });
+
+    items.Add(new SelectListItem { Text = "SOLD", Value = "3" });
+    
+    items.Add(new SelectListItem { Text = "EXPIRED", Value = "4" });
+
+    ViewBag.AuctionStatus = items;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+    <title>@ViewBag.Title</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    @Styles.Render("~/Styles/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link  rel="stylesheet" type="text/css" />
+    <!-- Theme color -->
+    <link id="switcher" href="@Url.Content("~/Content/css/theme-color/lite-blue-theme.css")" rel="stylesheet">
+    <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> 
+    
+    <!-- Custom css build by Marko Domic -->
+    <link href="@Url.Content("~/Content/css/custom.css")" rel='stylesheet' type='text/css'>    
+
+    <script type="text/javascript">
+        var appInsights=window.appInsights||function(config){
+            function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace","Ajax"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
+        }({
+            instrumentationKey:"de6091ca-ef4f-456a-93e3-84664d5f4571"
+        });
+        
+        window.appInsights=appInsights;
+        appInsights.trackPageView();
+    </script>
+</head>
+<body>
+    <!-- wpf loader Two -->
+    <div id="wpf-loader-two">
+        <div class="wpf-loader-two-inner">
+            <span>Loading</span>
+        </div>
+    </div>
+    <!-- / wpf loader Two -->
+    <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+    <!-- END SCROLL TOP BUTTON -->
+    <!-- Start header section -->
+    <header id="aa-header">        
+        <!-- start header bottom  -->
+        <div class="aa-header-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-header-bottom-area">
+                            <!-- logo  -->
+                            <div class="aa-logo">
+                                <!-- Text based logo -->                                
+                                <a href='@Url.Action("Index", linkTo)' class="logo-link">                                    
+                                    <img src="@Url.Content("~/Content/img/logo.png")" class="img-responsive img-logo" alt="img_logo">
+                                    <p>kupi<strong>Jeftino</strong> <span>Portal za aukcijsku prodaju</span></p>
+                                 </a>
+                                 <!-- img based logo -->
+                                 <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
+                            </div>
+                            <!-- / logo  -->                                                        
+                            @if (logedinUser)
+                            {
+                                <!-- cart box -->
+                                <div class="aa-cartbox">
+                                    <a class="aa-cart-link" href="@Url.Action("ViewProfile", "Account")">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        <span class="aa-cart-title">@Session["userFullName"]</span>
+                                        <span class="aa-cart-notify">2</span>
+                                    </a>
+                                    <div class="aa-cartbox-summary">
+                                        <ul>
+                                            <li>
+                                                <a class="aa-cartbox-img" href="#"><img src="@Url.Content("~/Content/img/woman-small-2.jpg")" alt="img"></a>
+                                                ><div class="aa-cartbox-info">
+                                                    <h4><a href="#">Product Name</a></h4>
+                                                    <p>1 x $250</p>
+                                                </div>
+                                                <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
+                                            </li>
+                                            <li>
+                                                <a class="aa-cartbox-img" href="#"><img src="@Url.Content("~/Content/img/woman-small-1.jpg")" alt="img"></a>
+                                                <div class="aa-cartbox-info">
+                                                    <h4><a href="#">Product Name</a></h4>
+                                                    <p>1 x $250</p>
+                                                </div>
+                                                <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
+                                            </li>
+                                            <li>
+                                                <span class="aa-cartbox-total-title">
+                                                    Total
+                                                </span>
+                                                <span class="aa-cartbox-total-price">
+                                                    $500
+                                                </span>
+                                            </li>
+                                        </ul>                                                                       
+                                        <a class="aa-cartbox-checkout aa-primary-btn" href="@Url.Action("LogOff", "Account")">Odjavite se</a>
+                                    </div>
+                                </div>
+                                <!-- / cart box -->
+                            }
+                                                         
+                            <!-- search box -->                            
+                            @if ((ViewBag.Title == "Početna") || (ViewBag.Title == "Admin panel"))
+                            {                                
+                                <div class="aa-search-box">
+                                    @using (Html.BeginForm("Index", linkTo, FormMethod.Get))
+                                    {
+                                        <div class="search-all">
+                                            @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+                                            <div class="search-fields">
+                                                @Html.Label("Min cena: ")
+                                                @Html.TextBox("minP")
+                                                @Html.Label("Max cena: ")
+                                                @Html.TextBox("maxP")
+                                                @Html.Label("Status aukcije: ")
+                                                @Html.DropDownList("AuctionStatus")
+                                            </div>
+                                        </div>
+                                        <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    
+                                    }                                    
+                                </div>
+                            }
+                            <!-- / search box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / header bottom  -->
+    </header>
+    <!-- / header section -->
+    <!-- menu -->
+    <section id="menu">
+        <div class="container">
+            <div class="menu-area">
+                <!-- Navbar -->
+                <div class="navbar navbar-inverse" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <!-- Left nav -->
+                            <ul class="nav navbar-nav">  
+                                @if (cond)
+                                {
+                                    <li>@Html.ActionLink("Početna", "Index", "Home")</li>
+                                    <li><a href="#">Otvorene aukcije</a></li>
+                                    <li><a href="#">O nama</a></li>
+                                    <li><a href="#">Kontakt</a></li>
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("Dodajte aukciju", "AddAuction", "Admin")</li>
+                                    <li><a href="#">Otvorene aukcije</a></li>                                    
+                                }
+                            </ul>
+                            <!-- Right nav -->
+                            @Html.Partial("_LoginPartial")
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / menu -->    
+    <div class="container body-content">
+        @RenderBody()
+        <hr />        
+    </div>
+
+    @Html.Partial("_Footer")
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/otherjs")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+       

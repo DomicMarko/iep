@@ -1,0 +1,74 @@
+﻿@model PagedList.IPagedList<Veb_portal_za_aukcijsku_prodaju.Models.Aukcija>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Početna";
+}   
+  
+
+  <!-- Products section -->
+  <section id="aa-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="aa-product-area">
+                            <div class="aa-product-inner">
+                                <!-- start page numbering -->
+                                <div class="page-numbering">                                    
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                </div>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- Start all products -->
+                                    <div class="tab-pane fade in active" id="men">
+                                        <ul class="aa-product-catg">
+                                            @foreach (var item in Model)
+                                            {
+                                                <!-- start single product item -->
+                                                <li>
+                                                    <figure>
+                                                        <a class="aa-product-img" href="@Url.Action("Index", "Auction", new { id = item.AukcijaID})">
+                                                            @{
+                                                                string imageSrc = "/Content/img/view-slider/large/polo-shirt-1.png";
+                                                                if (item.Slika != null)
+                                                                {
+                                                                    string imageBase64 = Convert.ToBase64String(item.Slika);
+                                                                    imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                                                                }
+                                                            }
+                                                            <img src="@imageSrc" alt="slika_proizvoda" class="product-image" />
+                                                        </a>
+                                                        @if (item.Status == "OPEN")
+                                                        {
+                                                            <a class="aa-add-card-btn" href="#" data-value="@item.AukcijaID"><span class="fa fa-shopping-cart"></span>Bid</a>
+                                                        }                                                        
+                                                    </figure>
+                                                    <figcaption>
+                                                        <h4 class="aa-product-title"><a href="@Url.Action("Index", "Auction", new { id = item.AukcijaID})">@Html.DisplayFor(modelItem => item.Proizvod)</a></h4>
+                                                        <span class="aa-product-price">@Html.DisplayFor(modelItem => item.TrenutnaCena)</span><br />
+                                                        <span class="time-remaining">00:00:00</span>
+                                                    </figcaption>
+                                                    <div class="aa-product-hvr-content">
+                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Poslednji bidovao">Marko Domic</a>
+                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Početna cena">@Html.DisplayFor(modelItem => item.PocetnaCena)</a>
+                                                    </div>
+                                                    <!-- product badge -->
+                                                    <span class="aa-badge aa-sale" href="#">@Html.DisplayFor(modelItem => item.Status)</span>
+                                                </li>
+                                            }
+                                        </ul>                                        
+                                    </div>
+                                    <!-- / all products -->
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  <!-- / Products section -->  
+
+    

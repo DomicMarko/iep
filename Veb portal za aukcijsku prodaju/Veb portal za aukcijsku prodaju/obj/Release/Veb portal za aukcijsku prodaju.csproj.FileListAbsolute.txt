@@ -1,0 +1,72 @@
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\ApplicationInsights.config
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Veb portal za aukcijsku prodaju.dll.config
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Veb portal za aukcijsku prodaju.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Veb portal za aukcijsku prodaju.pdb
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Antlr3.Runtime.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\EntityFramework.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\EntityFramework.SqlServer.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.Agent.Intercept.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.DependencyCollector.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.Web.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.WindowsServer.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.ApplicationInsights.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.Facebook.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.Google.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Web.Infrastructure.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Newtonsoft.Json.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Owin.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\PagedList.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\PagedList.Mvc.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.Helpers.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.Mvc.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.Optimization.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.Razor.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.WebPages.Deployment.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.WebPages.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.WebPages.Razor.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\WebGrease.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.DependencyCollector.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.Web.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AI.WindowsServer.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.ApplicationInsights.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\PagedList.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\PagedList.Mvc.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.Helpers.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.Mvc.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.Optimization.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.Razor.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.WebPages.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.WebPages.Deployment.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\System.Web.WebPages.Razor.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Antlr3.Runtime.pdb
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Newtonsoft.Json.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\EntityFramework.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\EntityFramework.SqlServer.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.Google.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\obj\Release\Veb portal za aukcijsku prodaju.dll
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\obj\Release\Veb portal za aukcijsku prodaju.pdb
+D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\obj\Release\Veb portal za aukcijsku prodaju.csprojResolveAssemblyReference.cache
