@@ -10,7 +10,9 @@
 namespace Veb_portal_za_aukcijsku_prodaju.Models
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class Aukcija
     {
@@ -32,6 +34,8 @@ namespace Veb_portal_za_aukcijsku_prodaju.Models
         public Nullable<double> TrenutnaCena { get; set; }
         public byte[] Slika { get; set; }
         public Nullable<int> BidID { get; set; }
+        public IEnumerable<Bid> Top10Bids { get; set; }
+        public double PreostaloVreme { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bid> Bids { get; set; }

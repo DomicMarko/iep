@@ -409,6 +409,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sequence-theme.modern-slide-in.js" />
     <Content Include="Scripts\sequence.js" />
+    <Content Include="Scripts\signalr-actions.js" />
     <Content Include="Scripts\slick.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />

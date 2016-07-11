@@ -137,6 +137,26 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                             break;
                     }
 
+                    foreach (Aukcija auk in aukcijas)
+                    {
+                        if (auk.BidID != null)
+                        {
+                            Bid bid = context.Bids.Find(auk.BidID);
+                            Korisnik user = context.Korisniks.Find(bid.KorisnikID);
+
+                            bid.Korisnik = user;
+                            auk.Bid = bid;
+                        }
+
+                        if ((auk.VremeZatvaranja != null) && (!auk.VremeZatvaranja.Equals("")) && (auk.Status.Equals("OPEN")))
+                            auk.PreostaloVreme = ((DateTime)auk.VremeZatvaranja - DateTime.Now).TotalSeconds;
+                        else
+                            if ((auk.VremeOtvaranja != null) && (!auk.VremeOtvaranja.Equals("")) && (!auk.Status.Equals("OPEN")))
+                                //auk.PreostaloVreme = ((DateTime)auk.VremeZatvaranja - (DateTime)auk.VremeOtvaranja).TotalSeconds;
+                                auk.PreostaloVreme = -1;
+                            else
+                                auk.PreostaloVreme = (double)auk.Trajanje;
+                    }
 
                     int pageSize = 10;
                     int pageNumber = (page ?? 1);

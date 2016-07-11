@@ -31,33 +31,31 @@
                                         @foreach (var item in Model)
                                         {
                                             string lastBid = item.AukcijaID + "_lastBid";
-                                            string lastPrice = item.AukcijaID + "_lastPrice";
+
+                                            string currentPriceID = item.AukcijaID + "_lastPrice";
+                                            string startPriceID = item.AukcijaID + "_startPrice";
+                                            string statusID = item.AukcijaID + "_status";
+                                            string timeID = item.AukcijaID + "_time";
+
                                             <!-- start single product item -->
                                             <li>
                                                 <figure>
                                                     <a class="aa-product-img" href="@Url.Action("Index", "Auction", new { id = item.AukcijaID})">
                                                         @{
-                                            string imageSrc = "/Content/img/view-slider/large/polo-shirt-1.png";
-                                            if (item.Slika != null)
-                                            {
-                                                string imageBase64 = Convert.ToBase64String(item.Slika);
-                                                imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                                            }
+                                                            string imageSrc = "/Content/img/view-slider/large/polo-shirt-1.png";
+                                                            if (item.Slika != null)
+                                                            {
+                                                                string imageBase64 = Convert.ToBase64String(item.Slika);
+                                                                imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                                                            }
                                                         }
                                                         <img src="@imageSrc" alt="slika_proizvoda" class="product-image" />
                                                     </a>
-                                                    @if (Session["userID"] != null)
-                                                    {
-                                                        if (item.Status == "OPEN")
-                                                        {
-                                                            <div class="aa-add-card-btn" href="#" data-value="@item.AukcijaID"><span class="fa fa-shopping-cart"></span>Bid</div>
-                                                        }
-                                                    }
                                                 </figure>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="@Url.Action("Index", "Auction", new { id = item.AukcijaID})">@Html.DisplayFor(modelItem => item.Proizvod)</a></h4>
-                                                    <span class="aa-product-price" id="@lastPrice">@Html.DisplayFor(modelItem => item.TrenutnaCena)</span><br />
-                                                    <span class="time-remaining">00:00:00</span>
+                                                    <span class="aa-product-price" id="@currentPriceID">@Html.DisplayFor(modelItem => item.TrenutnaCena)</span><br />
+                                                    <span class="time-remaining" id="@timeID" data-value="@item.PreostaloVreme"></span>
                                                 </figcaption>
                                                 <div class="aa-product-hvr-content">
                                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Poslednji bidovao" id="@lastBid">
@@ -70,10 +68,10 @@
                                                             <span>Nema ponuda</span>
                                                         }
                                                     </a>
-                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Početna cena">@Html.DisplayFor(modelItem => item.PocetnaCena)</a>
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Početna cena" id="@startPriceID">@Html.DisplayFor(modelItem => item.PocetnaCena)</a>
                                                 </div>
                                                 <!-- product badge -->
-                                                <span class="aa-badge aa-sale" href="#">@Html.DisplayFor(modelItem => item.Status)</span>
+                                                <span class="aa-badge aa-sale" href="#" id="@statusID">@Html.DisplayFor(modelItem => item.Status)</span>
                                             </li>
                                         }
                                     </ul>
@@ -96,37 +94,5 @@
     <!--Reference the autogenerated SignalR hub script. -->
     <script src="~/signalr/hubs"></script>
     <!--SignalR script to update the chat page and send messages.-->
-    <script>
-        $(function () {
-
-            // Reference the auto-generated proxy for the hub.
-            var stream = $.connection.auctionChanges;
-
-            // Create a function that the hub can call back to display messages.
-            stream.client.updateLastBid = function (auctionID, fullName, newPrice) {
-
-                var fieldToChangeID = '#' + auctionID + '_lastBid';
-                var fieldToChangePriceID = '#' + auctionID + '_lastPrice';
-
-                $(fieldToChangeID).text(fullName);
-                $(fieldToChangePriceID).text(newPrice);
-            };
-
-            // Start the connection.
-            $.connection.hub.start().done(function () {
-                $('.aa-add-card-btn').click(function () {
-
-                    var auctionID = this.getAttribute('data-value');
-                    var userID = $('#userIDLabel').val();
-
-                    // Call the SendBid method on the hub.
-                    stream.server.sendBid(auctionID, userID);
-                });
-            });
-        });
-
-    </script>
+    <script src="~/Scripts/signalr-actions.js"></script>
 }
-
-    
-

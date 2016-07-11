@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Veb_portal_za_aukcijsku_prodaju.Hubs;
 using Veb_portal_za_aukcijsku_prodaju.Models;
 
 namespace Veb_portal_za_aukcijsku_prodaju.Controllers
@@ -22,12 +23,35 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                 {
                     return HttpNotFound();
                 }
+
+                var bids = context.Bids
+                    .Where(n => n.AukcijaID == id)
+                    .OrderByDescending(n => n.PonCena)
+                    .Take(10);
+
+                foreach(var bid in bids)
+                {
+                    Korisnik korisnik = context.Korisniks.Find(bid.KorisnikID);
+                    bid.KorisnikImePrezime = korisnik.Ime + " " + korisnik.Prezime;
+                }
+
+                aukcija.Top10Bids = bids;
+
+                aukcija.Top10Bids = aukcija.Top10Bids.ToList();
+
+                if ((aukcija.VremeZatvaranja != null) && (!aukcija.VremeZatvaranja.Equals("")) && (aukcija.Status.Equals("OPEN")))
+                    aukcija.PreostaloVreme = ((DateTime)aukcija.VremeZatvaranja - DateTime.Now).TotalSeconds;
+                else
+                    if ((aukcija.VremeOtvaranja != null) && (!aukcija.VremeOtvaranja.Equals("")) && (!aukcija.Status.Equals("OPEN")))
+                        //auk.PreostaloVreme = ((DateTime)auk.VremeZatvaranja - (DateTime)auk.VremeOtvaranja).TotalSeconds;
+                        aukcija.PreostaloVreme = -1;
+                    else
+                        aukcija.PreostaloVreme = (double)aukcija.Trajanje;
             }
             return View(aukcija);
         }
-
-        [HttpGet]
-        public ActionResult ChangePrice(int? id, string newPrice)
+        
+        public void ChangePrice(int? id, string newPrice)
         {
             try
             {
@@ -42,6 +66,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                 if (editAukcija != null)
                 {
                     editAukcija.PocetnaCena = doubleValue;
+                    editAukcija.TrenutnaCena = doubleValue;
                 }
 
                 using (var context = new AukcijaEntities())
@@ -58,8 +83,8 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
             {
                 Console.WriteLine("'{0}' is outside the range of a Double.", newPrice);
             }
-
-            return RedirectToAction("Index", "Auction", new { id = id });
+            
+            //return RedirectToAction("Index", "Admin", new { id = id });
 
         }
 
@@ -99,13 +124,12 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
             return RedirectToAction("Index", "Admin", new { id = id });
 
         }
-
-        [HttpGet]
-        public ActionResult OpenAuction(int? id)
+        
+        public void OpenAuction(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return;
             }
 
             try
@@ -139,7 +163,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                 Console.WriteLine("Unable to delete auction");
             }
 
-            return RedirectToAction("Index", "Admin", new { id = id });
+           // return RedirectToAction("Index", "Admin", new { id = id });
 
         }
     }

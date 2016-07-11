@@ -25,6 +25,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Models
         public Nullable<System.DateTime> Vreme { get; set; }
         public int KorisnikID { get; set; }
         public int AukcijaID { get; set; }
+        public string KorisnikImePrezime { get; set; }
     
         public virtual Aukcija Aukcija { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

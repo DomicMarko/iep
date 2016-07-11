@@ -115,9 +115,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                     default:  // Name ascending 
                         aukcijas = aukcijas.OrderBy(s => s.Proizvod);
                         break;
-                }
-
-     //           IEnumerable<Veb_portal_za_aukcijsku_prodaju.Models.Authentication.PreviewAuction> aukcijasForPreview = new IEnumerable<Veb_portal_za_aukcijsku_prodaju.Models.Authentication.PreviewAuction>();
+                }    
                 
                 foreach(Aukcija auk in aukcijas)
                 {
@@ -129,6 +127,15 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                         bid.Korisnik = user;
                         auk.Bid = bid;
                     }
+
+                    if ((auk.VremeZatvaranja != null) && (!auk.VremeZatvaranja.Equals("")) && (auk.Status.Equals("OPEN")))
+                        auk.PreostaloVreme = ((DateTime)auk.VremeZatvaranja - DateTime.Now).TotalSeconds;
+                    else
+                        if ((auk.VremeOtvaranja != null) && (!auk.VremeOtvaranja.Equals("")) && (!auk.Status.Equals("OPEN")))
+                            //auk.PreostaloVreme = ((DateTime)auk.VremeZatvaranja - (DateTime)auk.VremeOtvaranja).TotalSeconds;
+                            auk.PreostaloVreme = -1;
+                        else
+                            auk.PreostaloVreme = (double)auk.Trajanje;
                 }                            
 
                 int pageSize = 10;
