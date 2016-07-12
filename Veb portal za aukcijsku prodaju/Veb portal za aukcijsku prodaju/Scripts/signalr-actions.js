@@ -1,8 +1,10 @@
-﻿window.onload = function () {
+﻿window.onload = function () {    
     var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
     loadTime = loadTime / 1000;
-
     var startCalc = -1, endCalc = -1;
+    // Reference the auto-generated proxy for the hub.
+    var stream = $.connection.auctionChanges;
+    
 
     $(function () {
 
@@ -19,7 +21,7 @@
             else startTimer(this, false);
 
         });
-
+ 
         function Countdown(options) {            
 
             var timer,
@@ -48,7 +50,7 @@
                 clearInterval(timer);
             };
         }
-
+ 
         function startTimer(certainObject, ifLoadTime) {
 
             var elem = certainObject;
@@ -57,17 +59,18 @@
             var res = fullID.split("_");
             var onlyAuctionID = res[0];
 
-            var statusID = onlyAuctionID + "_status";
+            var statusID = onlyAuctionID + '_status';
             var status = document.getElementById(statusID).innerHTML;
 
+            var timeID = onlyAuctionID + '_time';
             var sec = elem.getAttribute('data-value');
             if (ifLoadTime == true) sec = sec - loadTime;
             sec = parseInt(sec);            
-
+    
             if (sec > 0) {
-                
+    
                 if (status == 'OPEN') {
-
+    
                     var myCounter = new Countdown({
                         seconds: sec, // number of seconds to count down
                         onUpdateStatus: function (sec) {
@@ -82,37 +85,41 @@
                             elem.innerHTML = result;
                         }, // callback for each second
                         onCounterEnd: function () {
+    
+                            elem.innerHTML = '';
                             // Start the connection.
-                            $.connection.hub.start().done(function () {
-
-                                stream.server.changeAuctionStatus(onlyAuctionID);
+                            $.connection.hub.start().done(function () {                             
+                                stream.server.changeAuctionStatusOver(onlyAuctionID);
                             });
                         } // final action
                     });
-
-                    myCounter.start();
+                    
+                    myCounter.start();                    
                 }
             }
             else {
-                // Start the connection.
-                $.connection.hub.start().done(function () {
-
-                    stream.server.changeAuctionStatus(onlyAuctionID);
-                });
+  
+                elem.innerHTML = '';
             }
-        }
-
-        // Reference the auto-generated proxy for the hub.
-        var stream = $.connection.auctionChanges;
-
+        }        
+  
         // Create a function that the hub can call back to display messages.
-        stream.client.updateLastBidHome = function (auctionID, fullName, newPrice) {
+        stream.client.updateLastBidHome = function (auctionID, fullName, newPrice, noTokens, timeRemaining) {
 
-            var fieldToChangeID = '#' + auctionID + '_lastBid';
-            var fieldToChangePriceID = '#' + auctionID + '_lastPrice';
+            if (timeRemaining > 0) {
+                if (noTokens == true)
+                    alert("Nemate dovoljno tokena. Molimo Vas, kupite tokene kako bi nastavili sa aukcijom.");
+                else {
+                    var fieldToChangeID = '#' + auctionID + '_lastBid';
+                    var fieldToChangePriceID = '#' + auctionID + '_lastPrice';
 
-            $(fieldToChangeID).text(fullName);
-            $(fieldToChangePriceID).text(newPrice);
+                    document.getElementById(timeID).setAttribute('data-value', parseInt(timeRemaining) + '');
+
+                    $(fieldToChangeID).text(fullName);
+                    $(fieldToChangePriceID).text(newPrice);
+                }                
+            } else 
+                alert("Aukcija je zavrsena.");                      
         };
 
         stream.client.changeStartPriceAdmin = function (auctionID, newPrice) {
@@ -123,36 +130,47 @@
             $(fieldToChangeStartPriceID).text(newPrice);
             $(fieldToChangePriceID).text(newPrice);
         };
-
-        stream.client.auctionOpenedHome = function (auctionID, str) {
-
-            var statusID = '#' + auctionID + '_status';
-
+   
+        stream.client.auctionOpened = function (auctionID, str) {
+            
+            $('#admin-wrapper').css('display', 'none');
+            $('#user-wrapper').css('display', 'inline');
+            
+            var btnID = '#' + auctionID + '_btn';
+            $(btnID).css('display' , 'inline');
+            
+            var statusID = '#' + auctionID + '_status'; 
             $(statusID).text('OPEN');
-
+  
             var timeID = auctionID + "_time";
             var obj = document.getElementById(timeID);
-
-            endCalc = Date.now();
+  
+            endCalc = Date.now();            
             if (startCalc == -1) startCalc = str;
-
+                        
             loadTime = (endCalc - startCalc) / 1000;
             startTimer(obj, true);
-            
+
             startCalc = -1;            
             endCalc = -1;
         };
+  
+        stream.client.auctionStatusChangedOver = function (auctionID, newStatus) {
 
-        stream.client.auctionStatusChangedOver = function (auctionID) {
+            $('#admin-wrapper').css('display', 'none');
+            $('#user-wrapper').css('display', 'none');
 
-
+            var statusID = '#' + auctionID + '_status';
+            var buttonID = '#' + auctionID + '_btn';
+                        
+            $(statusID).text(newStatus);
+            $(buttonID).css('display', 'none');            
         };
-
-
+  
         // Start the connection.
         $.connection.hub.start().done(function () {            
-            $('.bidBtn').click(function () {
-                
+            $('.bidBtn').click(function () {                                
+
                 var auctionID = this.getAttribute('data-value');
                 var userID = $('#userIDLabel').val();
 
@@ -176,6 +194,7 @@
                 var auctionID = this.getAttribute('data-value');
                 stream.server.activateAuction(auctionID, startCalc);
             });
-        });        
+        });
+ 
     });
 }

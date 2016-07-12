@@ -8,6 +8,7 @@
     string statusID = Model.AukcijaID + "_status";
     string tableID = Model.AukcijaID + "_table";
     string timeID = Model.AukcijaID + "_time";
+    string bidBtnID = Model.AukcijaID + "_btn";
     var topBids = Model.Top10Bids;
     bool logedinUser = false;
     bool cond = true;
@@ -41,7 +42,7 @@
         }
     }
 
-    string styleUser = "";
+    string styleUser = "display: inline;";
     string styleAdmin = "display: none;";
     if (cond && logedinUser && ((@Model.Status == "OPEN")))
     {
@@ -54,6 +55,7 @@
             styleAdmin = "display: inline;";
         }
     }
+ 
 }
 
 @if (Session["userID"] != null)
@@ -112,18 +114,24 @@
                                         <h4>Poslednji koji je dao ponudu:</h4>
                                         <div class="aa-color-tag">@lastUser</div>
                                     }                                    
-                                    <div class="aa-prod-view-bottom">                                        
-                                        <div id="user-wrapper">
-                                            <a class="aa-add-to-cart-btn bidBtn" data-value="@Model.AukcijaID" href="#">Bid</a>
-                                        </div>                                
-                                        <div id="admin-wrapper">
-                                            <div class="aa-add-to-cart-btn" data-value="@Model.AukcijaID" id="activateAuction">Aktiviraj</div>
-                                            @Html.ActionLink("Obriši aukciju", "Delete", "Auction", new { id = Model.AukcijaID }, new { @class = "aa-add-to-cart-btn" })
-                                            <div class="aa-search-box">
-                                                <input type="text" id="newStartPriceLabel" />
-                                                <button type="submit" class="aa-add-to-cart-btn" data-value="@Model.AukcijaID" id="changePriceBtn">Promeni početnu cenu</button>
+                                    <div class="aa-prod-view-bottom">
+                                        @if (cond)
+                                        {
+                                            <div id="user-wrapper" style="@styleUser">
+                                                <a class="aa-add-to-cart-btn bidBtn" data-value="@Model.AukcijaID" id="@bidBtnID" href="#">Bid</a>
                                             </div>
-                                        </div>                                    
+                                        }
+                                        else
+                                        {
+                                            <div id="admin-wrapper" style="@styleAdmin">
+                                                <div class="aa-add-to-cart-btn" data-value="@Model.AukcijaID" id="activateAuction">Aktiviraj</div>
+                                                @Html.ActionLink("Obriši aukciju", "Delete", "Auction", new { id = Model.AukcijaID }, new { @class = "aa-add-to-cart-btn" })
+                                                <div class="aa-search-box">
+                                                    <input type="text" id="newStartPriceLabel" />
+                                                    <button type="submit" class="aa-add-to-cart-btn" data-value="@Model.AukcijaID" id="changePriceBtn">Promeni početnu cenu</button>
+                                                </div>
+                                            </div>
+                                        }                                                                                                                        
                                     </div>
                                 </div>
                             </div>
@@ -184,41 +192,38 @@
 
             // Create a function that the hub can call back to display messages.
 
-            streamSecond.client.updateLastBidAuction = function (auctionID, fullName, newPrice) {
+            streamSecond.client.updateLastBidAuction = function (auctionID, fullName, newPrice, noTokens) {
 
-                var fieldToChangeID = '#' + auctionID + '_lastBid';
-                var fieldToChangePriceID = '#' + auctionID + '_lastPrice';
-                var tableID = auctionID + '_table';
+                if (noTokens == false) {
 
-                $(fieldToChangeID).text(fullName);
-                $(fieldToChangePriceID).text(newPrice);
+                    var fieldToChangeID = '#' + auctionID + '_lastBid';
+                    var fieldToChangePriceID = '#' + auctionID + '_lastPrice';
+                    var tableID = auctionID + '_table';
 
-                // Find a <table> element with id="myTable":
-                var table = document.getElementById(tableID);
+                    $(fieldToChangeID).text(fullName);
+                    $(fieldToChangePriceID).text(newPrice);
 
-                // Create an empty <tr> element and add it to the 1st position of the table:
-                var row = table.insertRow(1);
+                    // Find a <table> element with id="myTable":
+                    var table = document.getElementById(tableID);
 
-                // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
+                    // Create an empty <tr> element and add it to the 1st position of the table:
+                    var row = table.insertRow(1);
 
-                // Add some text to the new cells:
-                cell1.innerHTML = '<strong> ' + fullName + '</strong>';
-                cell2.innerHTML = '&euro; ' + newPrice;
+                    // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
 
-                var numRows = table.rows.length;
+                    // Add some text to the new cells:
+                    cell1.innerHTML = '<strong> ' + fullName + '</strong>';
+                    cell2.innerHTML = '&euro; ' + newPrice;
 
-                if (numRows == 12) {
-                    table.deleteRow(11);
+                    var numRows = table.rows.length;
+
+                    if (numRows == 12) {
+                        table.deleteRow(11);
+                    }
                 }
 
-            };
-
-            streamSecond.client.auctionOpenedAuction = function (auctionID) {
-
-                $('#admin-wrapper').css('display', 'none');
-                $('#user-wrapper').css('display', 'inline');
             };
         });
 

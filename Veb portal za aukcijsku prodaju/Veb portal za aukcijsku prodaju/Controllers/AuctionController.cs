@@ -49,44 +49,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                         aukcija.PreostaloVreme = (double)aukcija.Trajanje;
             }
             return View(aukcija);
-        }
-        
-        public void ChangePrice(int? id, string newPrice)
-        {
-            try
-            {
-                double doubleValue = Convert.ToDouble(newPrice);
-                Aukcija editAukcija;
-
-                using (var context = new AukcijaEntities())
-                {
-                    editAukcija = context.Aukcijas.Find(id);
-                }
-
-                if (editAukcija != null)
-                {
-                    editAukcija.PocetnaCena = doubleValue;
-                    editAukcija.TrenutnaCena = doubleValue;
-                }
-
-                using (var context = new AukcijaEntities())
-                {
-                    context.Entry(editAukcija).State = System.Data.Entity.EntityState.Modified;
-                    context.SaveChanges();
-                }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Unable to convert '{0}' to a Double.", newPrice);
-            }
-            catch (OverflowException)
-            {
-                Console.WriteLine("'{0}' is outside the range of a Double.", newPrice);
-            }
-            
-            //return RedirectToAction("Index", "Admin", new { id = id });
-
-        }
+        }               
 
         [HttpGet]
         public ActionResult Delete(int? id)
@@ -124,47 +87,6 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
             return RedirectToAction("Index", "Admin", new { id = id });
 
         }
-        
-        public void OpenAuction(int? id)
-        {
-            if (id == null)
-            {
-                return;
-            }
-
-            try
-            {
-                Aukcija editAukcija;
-
-                using (var context = new AukcijaEntities())
-                {
-                    editAukcija = context.Aukcijas.Find(id);
-                }
-
-                if (editAukcija != null)
-                {
-                    DateTime startTime = DateTime.Now;
-                    DateTime endTime = startTime.AddSeconds((int)editAukcija.Trajanje);
-
-                    editAukcija.Status = "OPEN";
-                    editAukcija.VremeOtvaranja = startTime;
-                    editAukcija.VremeZatvaranja = endTime;
-                }
-
-
-                using (var context = new AukcijaEntities())
-                {
-                    context.Entry(editAukcija).State = System.Data.Entity.EntityState.Modified;
-                    context.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Unable to delete auction");
-            }
-
-           // return RedirectToAction("Index", "Admin", new { id = id });
-
-        }
+                
     }
 }
