@@ -118,13 +118,13 @@
                                         @if (cond)
                                         {
                                             <div id="user-wrapper" style="@styleUser">
-                                                <a class="aa-add-to-cart-btn bidBtn" data-value="@Model.AukcijaID" id="@bidBtnID" href="#">Bid</a>
+                                                <a class="aa-add-cart-btn bidBtn" data-value="@Model.AukcijaID" id="@bidBtnID" href="#">Bid</a>
                                             </div>
                                         }
                                         else
                                         {
                                             <div id="admin-wrapper" style="@styleAdmin">
-                                                <div class="aa-add-to-cart-btn" data-value="@Model.AukcijaID" id="activateAuction">Aktiviraj</div>
+                                                <button class="aa-add-to-cart-btn" data-value="@Model.AukcijaID" id="activateAuction">Aktiviraj</button>
                                                 @Html.ActionLink("Obriši aukciju", "Delete", "Auction", new { id = Model.AukcijaID }, new { @class = "aa-add-to-cart-btn" })
                                                 <div class="aa-search-box">
                                                     <input type="text" id="newStartPriceLabel" />

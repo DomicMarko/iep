@@ -51,11 +51,12 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
                         };
 
                         using (var context = new AukcijaEntities())
-                        {
-                            context.Bids.Add(newBid);
-                            context.SaveChanges();
+                        {                            
 
                             context.Entry(aukcija).State = System.Data.Entity.EntityState.Modified;
+                            context.SaveChanges();
+
+                            context.Bids.Add(newBid);
                             context.SaveChanges();
 
                             fullUserName = korisnik.Ime + " " + korisnik.Prezime;
@@ -65,8 +66,17 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
                     else
                     {
                         fullUserName = newPrice = null;
-                        tokens = true;
-                        timeRemaining = -1;
+
+                        if(aukcija.Status != "OPEN")
+                        {
+                            tokens = false;
+                            timeRemaining = -1;
+                        }
+                        else
+                        {
+                            tokens = true;
+                            timeRemaining = 1;
+                        }                        
                     }
                 }
                 else
@@ -184,7 +194,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
                     Nullable<int> lastBid = aukcija.BidID;
 
                     if (lastBid != null)
-                        aukcija.Status = "SOLD";
+                        aukcija.Status = "SOLD";                        
                     else
                         aukcija.Status = "EXPIRED";
 
@@ -194,6 +204,15 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
                     {
                         context.Entry(aukcija).State = System.Data.Entity.EntityState.Modified;
                         context.SaveChanges();
+
+                        if(result == "SOLD")
+                        {
+                            Bid bid = context.Bids.Find(aukcija.BidID);
+                            Korisnik korisnik = context.Korisniks.Find(bid.KorisnikID);
+
+                            korisnik.Aukcijas.Add(aukcija);
+                            context.SaveChanges();
+                        }
                     }
                 }
 

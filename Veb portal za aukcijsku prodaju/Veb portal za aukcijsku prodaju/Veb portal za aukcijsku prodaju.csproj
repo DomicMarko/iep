@@ -207,13 +207,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AllTablesContent\AllAukcijasController.cs" />
-    <Compile Include="Controllers\AllTablesContent\AllBidsController.cs" />
-    <Compile Include="Controllers\AllTablesContent\AllKorisniksController.cs" />
-    <Compile Include="Controllers\AllTablesContent\AllNarudzbinasController.cs" />
     <Compile Include="Controllers\AuctionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -472,6 +469,9 @@
     <Content Include="Views\AllNarudzbinas\Edit.cshtml" />
     <Content Include="Views\AllNarudzbinas\Index.cshtml" />
     <Content Include="Views\Auction\Index.cshtml" />
+    <Content Include="Views\Auction\AllAuctions.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\AllOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

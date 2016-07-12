@@ -65,8 +65,8 @@
             var timeID = onlyAuctionID + '_time';
             var sec = elem.getAttribute('data-value');
             if (ifLoadTime == true) sec = sec - loadTime;
-            sec = parseInt(sec);            
-    
+            sec = parseInt(sec);                        
+
             if (sec > 0) {
     
                 if (status == 'OPEN') {
@@ -105,18 +105,19 @@
   
         // Create a function that the hub can call back to display messages.
         stream.client.updateLastBidHome = function (auctionID, fullName, newPrice, noTokens, timeRemaining) {
-
-            if (timeRemaining > 0) {
+       
+            if (timeRemaining > 0) {       
                 if (noTokens == true)
                     alert("Nemate dovoljno tokena. Molimo Vas, kupite tokene kako bi nastavili sa aukcijom.");
                 else {
+       
                     var fieldToChangeID = '#' + auctionID + '_lastBid';
                     var fieldToChangePriceID = '#' + auctionID + '_lastPrice';
-
-                    document.getElementById(timeID).setAttribute('data-value', parseInt(timeRemaining) + '');
-
-                    $(fieldToChangeID).text(fullName);
-                    $(fieldToChangePriceID).text(newPrice);
+       
+                    //document.getElementById(timeID).setAttribute('data-value', parseInt(timeRemaining) + '');
+       
+                    $(fieldToChangeID).text(fullName);       
+                    $(fieldToChangePriceID).text(newPrice);       
                 }                
             } else 
                 alert("Aukcija je zavrsena.");                      
