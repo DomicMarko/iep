@@ -260,6 +260,7 @@
     <Content Include="Content\img\client-brand-jquery.png" />
     <Content Include="Content\img\client-brand-wordpress.png" />
     <Content Include="Content\img\close-icon.png" />
+    <Content Include="Content\img\default.png" />
     <Content Include="Content\img\fashion-banner.jpg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\man-small-1.jpg" />
