@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Veb_portal_za_aukcijsku_prodaju.Models;
 using Veb_portal_za_aukcijsku_prodaju.Models.Authentication;
+using System.Text;
 
 namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 {
@@ -279,33 +280,40 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangeFirstName(string newFirstName)
         {
-            try
+            bool check = checkLoginUser();
+
+            if(check)
             {
-                Korisnik editKorisnik;
-                int id = (int)Session["userID"];
-                using (var context = new AukcijaEntities())
+                try
                 {
-                    editKorisnik = context.Korisniks.Find(id);
+                    Korisnik editKorisnik;
+                    int id = (int)Session["userID"];
+                    using (var context = new AukcijaEntities())
+                    {
+                        editKorisnik = context.Korisniks.Find(id);
+                    }
+
+                    if (editKorisnik != null)
+                    {
+                        editKorisnik.Ime = newFirstName;
+                    }
+
+                    using (var context = new AukcijaEntities())
+                    {
+                        context.Entry(editKorisnik).State = System.Data.Entity.EntityState.Modified;
+                        context.SaveChanges();
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Unable to change first name.");
+                    ModelState.AddModelError("", "*Neispravno uneto ime.");
                 }
 
-                if (editKorisnik != null)
-                {
-                    editKorisnik.Ime = newFirstName;
-                }
-
-                using (var context = new AukcijaEntities())
-                {
-                    context.Entry(editKorisnik).State = System.Data.Entity.EntityState.Modified;
-                    context.SaveChanges();
-                }
+                return RedirectToAction("ViewProfile", "Account");
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Unable to change first name.");
-                ModelState.AddModelError("", "*Neispravno uneto ime.");
-            }
 
-            return RedirectToAction("ViewProfile", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -315,33 +323,40 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangeLastName(string newLastName)
         {
-            try
+            bool check = checkLoginUser();
+
+            if(check)
             {
-                Korisnik editKorisnik;
-                int id = (int)Session["userID"];
-                using (var context = new AukcijaEntities())
+                try
                 {
-                    editKorisnik = context.Korisniks.Find(id);
+                    Korisnik editKorisnik;
+                    int id = (int)Session["userID"];
+                    using (var context = new AukcijaEntities())
+                    {
+                        editKorisnik = context.Korisniks.Find(id);
+                    }
+
+                    if (editKorisnik != null)
+                    {
+                        editKorisnik.Prezime = newLastName;
+                    }
+
+                    using (var context = new AukcijaEntities())
+                    {
+                        context.Entry(editKorisnik).State = System.Data.Entity.EntityState.Modified;
+                        context.SaveChanges();
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Unable to change last name.");
+                    ModelState.AddModelError("", "*Neispravno uneto prezime.");
                 }
 
-                if (editKorisnik != null)
-                {
-                    editKorisnik.Prezime = newLastName;
-                }
-
-                using (var context = new AukcijaEntities())
-                {
-                    context.Entry(editKorisnik).State = System.Data.Entity.EntityState.Modified;
-                    context.SaveChanges();
-                }
+                return RedirectToAction("ViewProfile", "Account");
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Unable to change last name.");
-                ModelState.AddModelError("", "*Neispravno uneto prezime.");
-            }
 
-            return RedirectToAction("ViewProfile", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -351,33 +366,39 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangeEmail(string newEmail)
         {
-            try
+            bool check = checkLoginUser();
+
+            if(check)
             {
-                Korisnik editKorisnik;
-                int id = (int)Session["userID"];
-                using (var context = new AukcijaEntities())
+                try
                 {
-                    editKorisnik = context.Korisniks.Find(id);
-                }
+                    Korisnik editKorisnik;
+                    int id = (int)Session["userID"];
+                    using (var context = new AukcijaEntities())
+                    {
+                        editKorisnik = context.Korisniks.Find(id);
+                    }
 
-                if (editKorisnik != null)
-                {
-                    editKorisnik.Email = newEmail;
-                }
+                    if (editKorisnik != null)
+                    {
+                        editKorisnik.Email = newEmail;
+                    }
 
-                using (var context = new AukcijaEntities())
-                {
-                    context.Entry(editKorisnik).State = System.Data.Entity.EntityState.Modified;
-                    context.SaveChanges();
+                    using (var context = new AukcijaEntities())
+                    {
+                        context.Entry(editKorisnik).State = System.Data.Entity.EntityState.Modified;
+                        context.SaveChanges();
+                    }
                 }
+                catch (Exception)
+                {
+                    Console.WriteLine("Unable to change email.");
+                    ModelState.AddModelError("", "*Neispravna e-mail adresa.");
+                }
+                return RedirectToAction("ViewProfile", "Account");
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Unable to change email.");
-                ModelState.AddModelError("", "*Neispravna e-mail adresa.");
-            }
 
-            return RedirectToAction("ViewProfile", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -387,47 +408,150 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(string oldPassword, string newPassword)
         {
-            try
+            bool check = checkLoginUser();
+
+            if(check)
             {
-                if ((oldPassword.Equals("")) || (oldPassword == null) || (newPassword.Equals("")) || (newPassword == null))
+                try
                 {
-                    ModelState.AddModelError("", "*Niste uneli vrednosti u polja.");
-                    return RedirectToAction("ViewProfile", "Account");
-                }
-
-                Korisnik editKorisnik;
-                int id = (int)Session["userID"];
-                using (var context = new AukcijaEntities())
-                {
-                    editKorisnik = context.Korisniks.Find(id);
-                }
-
-                if (editKorisnik != null)
-                {
-                    if (!Base64Decode(editKorisnik.Lozinka).Equals(oldPassword))
+                    if ((oldPassword.Equals("")) || (oldPassword == null) || (newPassword.Equals("")) || (newPassword == null))
                     {
-                        ModelState.AddModelError("", "*Stara lozinka se ne poklapa.");
+                        ModelState.AddModelError("", "*Niste uneli vrednosti u polja.");
                         return RedirectToAction("ViewProfile", "Account");
                     }
 
-                    editKorisnik.Lozinka = Base64Encode(newPassword);
+                    Korisnik editKorisnik;
+                    int id = (int)Session["userID"];
+                    using (var context = new AukcijaEntities())
+                    {
+                        editKorisnik = context.Korisniks.Find(id);
+                    }
+
+                    if (editKorisnik != null)
+                    {
+                        if (!Base64Decode(editKorisnik.Lozinka).Equals(oldPassword))
+                        {
+                            ModelState.AddModelError("", "*Stara lozinka se ne poklapa.");
+                            return RedirectToAction("ViewProfile", "Account");
+                        }
+
+                        editKorisnik.Lozinka = Base64Encode(newPassword);
+                    }
+
+                    using (var context = new AukcijaEntities())
+                    {
+                        context.Entry(editKorisnik).State = System.Data.Entity.EntityState.Modified;
+                        context.SaveChanges();
+                    }
                 }
+                catch (Exception)
+                {
+                    Console.WriteLine("Unable to change email.");
+                    ModelState.AddModelError("", "*Neispravna nova lozinka.");
+                }
+                return RedirectToAction("ViewProfile", "Account");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        //
+        // POST: /Account/BuyTokens
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult BuyTokens()
+        {
+
+            bool check = checkLoginUser();
+
+            if(check)
+            {
+                int orderID;
+                DateTime datumKreiranja = DateTime.Now;
+                string status = "čekanje na obradu";
 
                 using (var context = new AukcijaEntities())
                 {
-                    context.Entry(editKorisnik).State = System.Data.Entity.EntityState.Modified;
+                    var newNarudzbina = new Narudzbina()
+                    {
+                        CenaPaketa = null,
+                        BrojTokena = null,
+                        DatumPravljenja = datumKreiranja,
+                        Status = status,
+                        KorisnikID = (int)Session["userID"]
+                    };
+
+                    context.Narudzbinas.Add(newNarudzbina);
+                    context.SaveChanges();
+
+                    orderID = newNarudzbina.NarudzbinaID;
+                }
+
+                string encodedID = Base64Encode("kljuc_" + orderID);
+
+                /*
+                var CentiliLink = "http://stage.centili.com/widget/WidgetModule?api=9da39076a3f651a6885d1c5135792b20" + "&clientID=" + encodedID;
+                return Redirect(CentiliLink);
+                */
+                return RedirectToAction("ViewProfile", "Account");                         
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public HttpStatusCodeResult EndPoint(string clientid, string status, int amount, double enduserprise)
+        {            
+
+            string decodedID = Base64Decode(clientid);
+            string[] splitedWords = decodedID.Split('_');
+
+            int id = Int32.Parse(splitedWords[0]);
+            
+            using(var context = new AukcijaEntities())
+            {
+                if (status.Equals("success"))
+                {
+                    Narudzbina narudzbina = context.Narudzbinas.Find(id);
+                    Korisnik korisnik = context.Korisniks.Find(narudzbina.KorisnikID);
+
+                    narudzbina.CenaPaketa = enduserprise;
+                    narudzbina.BrojTokena = amount;
+                    narudzbina.Status = "realizovana";
+
+                    korisnik.BrojTokena += amount;
+
+                    context.Entry(narudzbina).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+
+                    context.Entry(korisnik).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();                                        
+
+                    System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
+                    String emailAddress = korisnik.Email;                    
+
+                    message.From = new System.Net.Mail.MailAddress("test@mail.com");
+                    message.To.Add(new System.Net.Mail.MailAddress(emailAddress));
+                    message.IsBodyHtml = true;
+                    message.BodyEncoding = Encoding.UTF8;
+                    message.Subject = "Aukcija: Narudzbina tokena";
+                    message.Body = DateTime.Now + " dana ste kupili " + amount + " tokena po ceni od" +  enduserprise + " evra.";
+                    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+                    client.Send(message);
+                }
+                else
+                {
+                    Narudzbina narudzbina = context.Narudzbinas.Find(id);                    
+
+                    narudzbina.Status = "poništena";
+
+                    context.Entry(narudzbina).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
                 }
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Unable to change email.");
-                ModelState.AddModelError("", "*Neispravna nova lozinka.");
-            }
-
-            return RedirectToAction("ViewProfile", "Account");
+                                       
+            return new HttpStatusCodeResult(200);
         }
-
 
         //
         // GET: /Account/ConfirmEmail
@@ -738,7 +862,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion        
-       
+        #endregion
+
     }
 }

@@ -13,7 +13,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Models
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public partial class Aukcija
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +22,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Models
             this.Bids = new HashSet<Bid>();
             this.Korisniks = new HashSet<Korisnik>();
         }
-    
+
         public int AukcijaID { get; set; }
         public string Proizvod { get; set; }
         public Nullable<int> Trajanje { get; set; }
@@ -36,7 +36,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Models
         public Nullable<int> BidID { get; set; }
         public IEnumerable<Bid> Top10Bids { get; set; }
         public double PreostaloVreme { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bid> Bids { get; set; }
         public virtual Bid Bid { get; set; }

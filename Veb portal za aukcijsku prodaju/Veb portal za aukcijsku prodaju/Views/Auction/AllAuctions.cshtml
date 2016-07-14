@@ -6,6 +6,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (Session["userID"] != null)
+{
+    <input type="hidden" id="userIDLabel" value="@Session["userID"]" />
+}  
+
 <h2>@ViewBag.Title</h2>
 
 <!-- Products section -->
@@ -34,6 +39,21 @@
                                             string statusID = item.AukcijaID + "_status";
                                             string timeID = item.AukcijaID + "_time";
                                             string bidBtnID = item.AukcijaID + "_btn";
+
+                                            string badgeClass;
+
+                                            switch (item.Status)
+                                            {
+                                                case ("OPEN"):
+                                                    badgeClass = "aa-badge aa-sale";
+                                                    break;
+                                                case ("READY"):
+                                                    badgeClass = "aa-badge aa-hot";
+                                                    break;
+                                                default:
+                                                    badgeClass = "aa-badge aa-sold-out";
+                                                    break;
+                                            }
 
                                             <!-- start single product item -->
                                             <li>
@@ -86,7 +106,7 @@
                                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Početna cena" id="@startPriceID">@Html.DisplayFor(modelItem => item.PocetnaCena)</a>
                                                 </div>
                                                 <!-- product badge -->
-                                                <span class="aa-badge aa-sale" href="#" id="@statusID">@Html.DisplayFor(modelItem => item.Status)</span>
+                                                <span class="@badgeClass" href="#" id="@statusID">@Html.DisplayFor(modelItem => item.Status)</span>
                                             </li>
                                         }
                                     </ul>

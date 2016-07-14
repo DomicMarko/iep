@@ -12,6 +12,33 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 {
     public class AuctionController : Controller
     {
+
+        readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private bool checkAdmin()
+        {
+            bool cond = true;
+            if (Session["admin"] != null)
+            {
+                if ((bool)Session["admin"])
+                {
+                    cond = false;
+                }
+            }
+
+            return cond;
+        }
+
+        private bool checkLoginUser()
+        {
+            bool cond = false;
+            if (Session["userID"] != null)
+            {
+                cond = true;
+            }
+            return cond;
+        }
+
         // GET: Auction
         public ActionResult Index(int id = -1)
         {
@@ -55,43 +82,56 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
         [HttpGet]
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
-            try
+            if (checkAdmin())
+                return RedirectToAction("Login", "Account");
+            else
             {
-                Aukcija editAukcija;
-
-                using (var context = new AukcijaEntities())
+                if (id == null)
                 {
-                    editAukcija = context.Aukcijas.Find(id);
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                if (editAukcija != null)
+                try
                 {
-                    editAukcija.Status = "DELETED";
+                    Aukcija editAukcija;
+
+                    using (var context = new AukcijaEntities())
+                    {
+                        editAukcija = context.Aukcijas.Find(id);
+                    }
+
+                    if (editAukcija != null)
+                    {
+                        editAukcija.Status = "DRAFT";
+                    }
+
+                    using (var context = new AukcijaEntities())
+                    {
+                        context.Entry(editAukcija).State = System.Data.Entity.EntityState.Modified;
+                        context.SaveChanges();
+
+                        logger.Error("DELETE AUCTION: AuctionID: " + editAukcija.AukcijaID + ", AuctionStatus: " + editAukcija.Status);
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Unable to delete auction");
                 }
 
-                using (var context = new AukcijaEntities())
-                {
-                    context.Entry(editAukcija).State = System.Data.Entity.EntityState.Modified;
-                    context.SaveChanges();
-                }
+                return RedirectToAction("Index", "Admin", new { id = id });
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Unable to delete auction");
-            }
-
-            return RedirectToAction("Index", "Admin", new { id = id });
 
         }
 
         [HttpGet]
         public ActionResult AllAuctions(int? id, string sortOrder, string currentFilter, string searchString, string minP, string maxP, string AuctionStatus, int? page)
         {
+
+            if (!checkLoginUser())
+                return RedirectToAction("Login", "Account");
+            else
+            {
                 bool onlyMin, onlyMax, minMax;
                 onlyMin = onlyMax = minMax = false;
 
@@ -219,6 +259,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                     int pageNumber = (page ?? 1);
                     return View(aukcijas.ToPagedList(pageNumber, pageSize));
                 }
+            }
         }
                 
     }

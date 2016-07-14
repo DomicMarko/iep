@@ -13,11 +13,18 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 {
     public class HomeController : Controller
     {
+        readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, string minP, string maxP, string AuctionStatus, int? page)
-        {
-            bool onlyMin, onlyMax, minMax;
+        {            
+
+            bool onlyMin, onlyMax, minMax, allOrNot = false;
             onlyMin = onlyMax = minMax = false;
+
+            if ((sortOrder == null) && (currentFilter == null) && (searchString == null) && (minP == null) && (maxP == null) && (AuctionStatus == null) && (page == null))
+                allOrNot = false;
+            else
+                allOrNot = true;
 
             if (!String.IsNullOrEmpty(minP)) onlyMin = true;
             if (!String.IsNullOrEmpty(maxP)) onlyMax = true;
@@ -36,7 +43,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 
                 if (searchString != null)
                 {
-                    page = 1;
+                    page = 1;                    
                 }
                 else
                 {
@@ -45,14 +52,42 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 
                 ViewBag.CurrentFilter = searchString;
 
-                IEnumerable<Veb_portal_za_aukcijsku_prodaju.Models.Aukcija> aukcijas = context.Aukcijas.Include(a => a.Bid);
-                aukcijas = aukcijas.Where(s => !s.Status.Equals("DRAFT"));
+
+
+                IEnumerable<Veb_portal_za_aukcijsku_prodaju.Models.Aukcija> aukcijas;
+
+                if (allOrNot == true)
+                    aukcijas = context.Aukcijas.Include(a => a.Bid).Where(a => !a.Status.Equals("DRAFT"));
+                else
+                    aukcijas = context.Aukcijas.Include(a => a.Bid).Where(a => a.Status.Equals("OPEN") && !a.Status.Equals("DRAFT")).OrderByDescending(a => a.VremeOtvaranja).Take(5);
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     string[] words = searchString.Split(' ');
-                    aukcijas = aukcijas.Where(s => s.Proizvod.Contains(searchString));
+                    //aukcijas = aukcijas.Where(s => s.Proizvod.Contains(searchString));
+
+                    IEnumerable<Veb_portal_za_aukcijsku_prodaju.Models.Aukcija> tempAukc = null;
+                    bool first = true;
+                    foreach (string searchWord in words)
+                    {
+                        if ((!searchWord.Equals("")) && (!searchWord.Equals(" ")))
+                        {
+                            var tempAukcOneWord = aukcijas.Where(s => s.Proizvod.Contains(searchWord));
+
+                            if (first)
+                            {
+                                tempAukc = tempAukcOneWord;
+                                first = false;
+                            }
+                            else
+                                tempAukc = tempAukc.Union(tempAukcOneWord.AsEnumerable());
+                        }
+                    }
+
+                    aukcijas = tempAukc;
                 }
+
+
                 try
                 {
                     if (onlyMin || onlyMax || minMax)
@@ -115,11 +150,11 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                     default:  // Name ascending 
                         aukcijas = aukcijas.OrderBy(s => s.Proizvod);
                         break;
-                }    
-                
-                foreach(Aukcija auk in aukcijas)
+                }
+
+                foreach (Aukcija auk in aukcijas)
                 {
-                    if(auk.BidID != null)
+                    if (auk.BidID != null)
                     {
                         Bid bid = context.Bids.Find(auk.BidID);
                         Korisnik user = context.Korisniks.Find(bid.KorisnikID);
@@ -129,14 +164,20 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
                     }
 
                     if ((auk.VremeZatvaranja != null) && (!auk.VremeZatvaranja.Equals("")) && (auk.Status.Equals("OPEN")))
-                        auk.PreostaloVreme = ((DateTime)auk.VremeZatvaranja - DateTime.Now).TotalSeconds;
+                    {
+                        double diff = ((DateTime)auk.VremeZatvaranja - DateTime.Now).TotalSeconds;
+                        if (diff > 0)
+                            auk.PreostaloVreme = diff;
+                        else
+                            auk.PreostaloVreme = -2;
+                    }
                     else
                         if ((auk.VremeOtvaranja != null) && (!auk.VremeOtvaranja.Equals("")) && (!auk.Status.Equals("OPEN")))
                             //auk.PreostaloVreme = ((DateTime)auk.VremeZatvaranja - (DateTime)auk.VremeOtvaranja).TotalSeconds;
                             auk.PreostaloVreme = -1;
                         else
                             auk.PreostaloVreme = (double)auk.Trajanje;
-                }                            
+                }
 
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);

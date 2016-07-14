@@ -1,0 +1,3 @@
+ERROR 2016-07-14 02:37:06,283 48453ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 1, AuctionStatus: OPEN
+ERROR 2016-07-14 02:37:37,963 80133ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 99
+ERROR 2016-07-14 02:38:01,553 103723ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 99

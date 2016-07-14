@@ -8,7 +8,9 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
 {
     public class HelpMethods
     {
-        public static void BidAuction(int auctionID, int userID, out string fullUserName, out string newPrice, out bool tokens, out double timeRemaining)
+        readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        public void BidAuction(int auctionID, int userID, out string fullUserName, out string newPrice, out bool tokens, out double timeRemaining)
         {
 
             try
@@ -59,6 +61,8 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
                             context.Bids.Add(newBid);
                             context.SaveChanges();
 
+                            logger.Error("AUCTION BIDED: AuctionID: " + aukcija.AukcijaID + ", AuctionCurrentPrice: " + aukcija.TrenutnaCena + ", UserBidedID: " + userID);
+
                             fullUserName = korisnik.Ime + " " + korisnik.Prezime;
                             newPrice = "" + newPriceDouble;
                         }
@@ -95,8 +99,9 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
             }
         }
 
-        public static void ChangePrice(int? id, string newPrice)
-        {
+        public void ChangePrice(int? id, string newPrice)
+        {            
+
             try
             {
                 double doubleValue = Convert.ToDouble(newPrice);
@@ -117,6 +122,8 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
                 {
                     context.Entry(editAukcija).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
+
+                    logger.Error("AUCTION PRICE CHANGE: AuctionID: " + editAukcija.AukcijaID + ", AuctionStatus: " + editAukcija.Status + ", AuctionStartPrice: " + editAukcija.PocetnaCena);
                 }
             }
             catch (FormatException)
@@ -131,7 +138,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
             //return RedirectToAction("Index", "Admin", new { id = id });
         }
 
-        public static void OpenAuction(int? id)
+        public void OpenAuction(int? id)
         {
             if (id == null)
             {
@@ -162,6 +169,8 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
                 {
                     context.Entry(editAukcija).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
+
+                    logger.Error("AUCTION OPEN: AuctionID: " + editAukcija.AukcijaID + ", AuctionStatus: " + editAukcija.Status);
                 }
             }
             catch (Exception)
@@ -172,7 +181,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
             // return RedirectToAction("Index", "Admin", new { id = id });
         }
 
-        public static string AuctionOver(int id)
+        public string AuctionOver(int id)
         {
             string result = "";
             Aukcija aukcija;
@@ -212,6 +221,8 @@ namespace Veb_portal_za_aukcijsku_prodaju.Helpers
 
                             korisnik.Aukcijas.Add(aukcija);
                             context.SaveChanges();
+
+                            logger.Error("AUCTION OVER: AuctionID: " + aukcija.AukcijaID + ", AuctionStatus: " + aukcija.Status);
                         }
                     }
                 }

@@ -1107,10 +1107,10 @@ img {
 .aa-product-catg li {
   display: block;
   float: left;
-  height: 380px;
+  height: 300px;
   text-align: center;
-  margin: 0 0 20px 50px;
-  width: 20.5%;
+  margin: 0 0 35px 30px;
+  width: 17%;
   position: relative;
   overflow: hidden;
 }
@@ -1133,7 +1133,7 @@ img {
 }
 .aa-product-catg li figure {
   position: relative;
-  height: 300px;
+  height: 220px;
  // overflow: hidden;
 }
 .aa-product-catg li figure .aa-product-img {
@@ -1212,7 +1212,7 @@ img {
   background: #fff none repeat scroll 0 0;
   display: inline-block;
   margin: 0 5px;
-  padding: 5px 10px;
+  padding: 1px 3px;
 }
 .aa-product-catg li .aa-badge {
   position: absolute;

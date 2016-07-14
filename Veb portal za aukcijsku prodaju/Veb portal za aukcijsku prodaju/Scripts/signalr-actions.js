@@ -1,62 +1,52 @@
 ﻿window.onload = function () {    
-    var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
-    loadTime = loadTime / 1000;
+    var loadTime;
     var startCalc = -1, endCalc = -1;
     // Reference the auto-generated proxy for the hub.
     var stream = $.connection.auctionChanges;
     
 
-    $(function () {
-
-        $('.time-remaining').each(function (i, obj) {
-
-            var fullIDTemp = this.id;
-            var resTemp = fullIDTemp.split("_");
-            var onlyAuctionIDTemp = resTemp[0];
-
-            var statusIDTemp = onlyAuctionIDTemp + "_status";
-            var statusTemp = document.getElementById(statusIDTemp).innerHTML;
-
-            if (statusTemp == 'OPEN') startTimer(this, true);
-            else startTimer(this, false);
-
-        });
+    $(function () {        
  
         function Countdown(options) {            
 
             var timer,
             instance = this,
+            idElement = options.id,
             seconds = options.seconds || 10,
             updateStatus = options.onUpdateStatus || function () { },
             counterEnd = options.onCounterEnd || function () { };
 
-            function decrementCounter() {
-                updateStatus(seconds);
+            function decrementCounter() {                
+                var timeStr = document.getElementById(idElement).getAttribute('data-value');                
+                seconds = Math.round(parseFloat(timeStr));
+                updateStatus(seconds);                
                 if (seconds === 0) {
                     counterEnd();
                     instance.stop();
-                }
-                seconds--;
+                }                
+                seconds--;                
+                document.getElementById(idElement).setAttribute('data-value', seconds + "");                
             }
 
-            this.start = function () {
-                clearInterval(timer);
-                timer = 0;
-                seconds = options.seconds;
+            this.start = function () {                
+                clearInterval(timer);                
+                timer = 0;                
+                seconds = options.seconds;                
                 timer = setInterval(decrementCounter, 1000);
+
             };
 
             this.stop = function () {
                 clearInterval(timer);
             };
-        }
- 
+        }        
+
         function startTimer(certainObject, ifLoadTime) {
 
             var elem = certainObject;
 
             var fullID = elem.id;
-            var res = fullID.split("_");
+            var res = fullID.split('_');
             var onlyAuctionID = res[0];
 
             var statusID = onlyAuctionID + '_status';
@@ -64,17 +54,20 @@
 
             var timeID = onlyAuctionID + '_time';
             var sec = elem.getAttribute('data-value');
-            if (ifLoadTime == true) sec = sec - loadTime;
-            sec = parseInt(sec);                        
+            if (ifLoadTime == true) sec = sec - loadTime;            
+            
+            sec = Math.round(parseFloat(sec));            
+            elem.setAttribute('data-value', sec + "");
 
             if (sec > 0) {
     
                 if (status == 'OPEN') {
     
                     var myCounter = new Countdown({
+                        id: timeID,
                         seconds: sec, // number of seconds to count down
                         onUpdateStatus: function (sec) {
-
+                                                        
                             var totalSec = sec;
                             var hours = parseInt(totalSec / 3600) % 24;
                             var minutes = parseInt(totalSec / 60) % 60;
@@ -94,34 +87,57 @@
                         } // final action
                     });
                     
-                    myCounter.start();                    
+                    myCounter.start();
                 }
             }
             else {
   
                 elem.innerHTML = '';
+                $.connection.hub.start().done(function () {                    
+                    stream.server.changeAuctionStatusOver(onlyAuctionID);
+                });
             }
         }        
   
         // Create a function that the hub can call back to display messages.
-        stream.client.updateLastBidHome = function (auctionID, fullName, newPrice, noTokens, timeRemaining) {
-       
+        stream.client.updateLastBidHome = function (userID, auctionID, fullName, newPrice, noTokens, timeRemaining) {
+            
             if (timeRemaining > 0) {       
-                if (noTokens == true)
-                    alert("Nemate dovoljno tokena. Molimo Vas, kupite tokene kako bi nastavili sa aukcijom.");
+                if (noTokens == true) {
+                    var userIDTemp = $('#userIDLabel').val();
+                    if (userID == userIDTemp) {
+                        var start = Date.now();
+                        var timeID = auctionID + '_time';
+                        var time = document.getElementById(timeID).getAttribute('data-value');
+                        time = Math.round(parseFloat(time));
+                        alert("Nemate dovoljno tokena. Molimo Vas, kupite tokene kako bi nastavili sa aukcijom.");                        
+                        var diff = (Date.now() - start) / 1000;                        
+                        time = time - diff;                        
+                        document.getElementById(timeID).setAttribute('data-value', time + '');                        
+                    }                        
+                }                    
                 else {
-       
-                    var fieldToChangeID = '#' + auctionID + '_lastBid';
-                    var fieldToChangePriceID = '#' + auctionID + '_lastPrice';
-       
-                    //document.getElementById(timeID).setAttribute('data-value', parseInt(timeRemaining) + '');
-       
-                    $(fieldToChangeID).text(fullName);       
-                    $(fieldToChangePriceID).text(newPrice);       
+                    
+                    var fieldToChangeID = '#' + auctionID + '_lastBid';                    
+                    var fieldToChangePriceID = '#' + auctionID + '_lastPrice';                    
+                    var timeID = auctionID + '_time';
+                    
+                    var tokensID = '#' + userID + '_tokens';                    
+                    var tokensStr = $(tokensID).text();                    
+                    var tokens = parseInt(tokensStr) - 1;
+
+                    $(tokensID).text(tokens + '');
+                    document.getElementById(timeID).setAttribute('data-value', timeRemaining + '');
+                    
+                    $(fieldToChangeID).text(fullName);                    
+                    $(fieldToChangePriceID).text(newPrice);                    
                 }                
-            } else 
-                alert("Aukcija je zavrsena.");                      
-        };
+            } else {
+                var userIDTemp = $('#userIDLabel').val();
+                if (userID == userIDTemp)
+                    alert("Aukcija je završena.");
+            }                
+        };              
 
         stream.client.changeStartPriceAdmin = function (auctionID, newPrice) {
 
@@ -130,8 +146,8 @@
 
             $(fieldToChangeStartPriceID).text(newPrice);
             $(fieldToChangePriceID).text(newPrice);
-        };
-   
+        };         
+
         stream.client.auctionOpened = function (auctionID, str) {
             
             $('#admin-wrapper').css('display', 'none');
@@ -154,9 +170,23 @@
 
             startCalc = -1;            
             endCalc = -1;
-        };
+        };        
   
         stream.client.auctionStatusChangedOver = function (auctionID, newStatus) {
+
+            var badgeClass;
+
+            switch (newStatus) {
+                case ("OPEN"):
+                    badgeClass = "aa-badge aa-sale";
+                    break;
+                case ("READY"):
+                    badgeClass = "aa-badge aa-hot";
+                    break;
+                default:
+                    badgeClass = "aa-badge aa-sold-out";
+                    break;
+            }
 
             $('#admin-wrapper').css('display', 'none');
             $('#user-wrapper').css('display', 'none');
@@ -165,8 +195,9 @@
             var buttonID = '#' + auctionID + '_btn';
                         
             $(statusID).text(newStatus);
+            $(statusID).removeClass().addClass(badgeClass);
             $(buttonID).css('display', 'none');            
-        };
+        };        
   
         // Start the connection.
         $.connection.hub.start().done(function () {            
@@ -184,18 +215,35 @@
                 var auctionID = this.getAttribute('data-value');
                 var newPrice = $('#newStartPriceLabel').val();
 
-                if ((newPrice == null) || (newPrice == ""))
-                    alert("Unesite novu početnu cenu aukcije.");
+                if ((newPrice == null) || (newPrice == ''))
+                    alert('Unesite novu početnu cenu aukcije.');
                 else
                     stream.server.changeStartPrice(auctionID, newPrice);
             });
 
             $('#activateAuction').click(function () {
+                
                 startCalc = Date.now();
                 var auctionID = this.getAttribute('data-value');
                 stream.server.activateAuction(auctionID, startCalc);
             });
+        });        
+
+        loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;        
+        loadTime = loadTime / 1000;
+
+        $('.time-remaining').each(function (i, obj) {
+
+            var fullIDTemp = this.id;
+            var resTemp = fullIDTemp.split("_");
+            var onlyAuctionIDTemp = resTemp[0];
+
+            var statusIDTemp = onlyAuctionIDTemp + "_status";
+            var statusTemp = document.getElementById(statusIDTemp).innerHTML;
+
+            if (statusTemp == 'OPEN') startTimer(this, true);
+            else startTimer(this, false);
+
         });
- 
     });
 }

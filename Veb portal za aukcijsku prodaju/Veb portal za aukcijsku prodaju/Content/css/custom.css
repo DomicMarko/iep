@@ -44,8 +44,8 @@
 
 }
 .product-image {
-    max-width: 240px;
-    max-height: 300px;
+    max-width: 196px;
+    max-height: 218px;
 }
 
 figure {
@@ -78,4 +78,13 @@ figure {
 
 .aa-add-card-btn {
     cursor: pointer;
+}
+
+.filter-col{
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.search-fields{
+    float: left;
 }

@@ -2,7 +2,26 @@
 @{
     ViewBag.Title = "Profil korisnika";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string numTokensID = Model.KorisnikID + "_tokens";
+
+    List<SelectListItem> items = new List<SelectListItem>();
+
+    items.Add(new SelectListItem { Text = "", Value = "0", Selected = true });
+
+    items.Add(new SelectListItem { Text = "SILVER", Value = "1" });
+
+    items.Add(new SelectListItem { Text = "GOLD", Value = "2" });
+
+    items.Add(new SelectListItem { Text = "PLATINUM", Value = "3" });    
+
+    ViewBag.Packs = items;
 }
+
+@if (Session["userID"] != null)
+{
+    <input type="hidden" id="userIDLabel" value="@Session["userID"]" />
+}  
 
 <h2>Profil korisnika</h2>
 
@@ -66,9 +85,16 @@
                                         </p>                                        
                                     </div>
                                     <h4>Broj tokena: </h4>
-                                    <div class="aa-prod-view-size">@Model.BrojTokena</div>
-                                    <div class="aa-prod-view-bottom">
-                                        <a class="aa-add-to-cart-btn" href="#">Kupite tokene</a>                                      
+                                    <div class="aa-prod-view-size" id="@numTokensID">@Model.BrojTokena</div>
+                                    <div class="aa-prod-view-bottom">                                        
+                                        <div class="aa-search-box" id="hidden-form-buy-tokens">
+                                            @using (Html.BeginForm("BuyTokens", "Account", FormMethod.Post))
+                                            {
+                                                @Html.AntiForgeryToken()                                                
+                                                <button type="submit" class="aa-add-to-cart-btn">Kupite tokene</button>
+                                                <span style="color: red;">@Html.ValidationSummary()</span>
+                                            }
+                                        </div>                                     
                                         <a class="aa-add-to-cart-btn" id="changePassword" href="#">Promenite lozinku</a>                                             
                                         @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
                                         {
@@ -122,6 +148,21 @@
                                                         string timeID = item.AukcijaID + "_time";
                                                         string bidBtnID = item.AukcijaID + "_btn";
 
+                                                        string badgeClass;
+
+                                                        switch (item.Status)
+                                                        {
+                                                            case ("OPEN"):
+                                                                badgeClass = "aa-badge aa-sale";
+                                                                break;
+                                                            case ("READY"):
+                                                                badgeClass = "aa-badge aa-hot";
+                                                                break;
+                                                            default:
+                                                                badgeClass = "aa-badge aa-sold-out";
+                                                                break;
+                                                        }
+
                                                         <!-- start single product item -->
                                                         <li>
                                                             <figure>
@@ -173,7 +214,7 @@
                                                                 <a href="#" data-toggle="tooltip" data-placement="top" title="Početna cena" id="@startPriceID">@Html.DisplayFor(modelItem => item.PocetnaCena)</a>
                                                             </div>
                                                             <!-- product badge -->
-                                                            <span class="aa-badge aa-sale" href="#" id="@statusID">@Html.DisplayFor(modelItem => item.Status)</span>
+                                                            <span class="@badgeClass" href="#" id="@statusID">@Html.DisplayFor(modelItem => item.Status)</span>
                                                         </li>
                                                     }
                                                     if(countAuctions > 5)
@@ -212,6 +253,7 @@
                                             using (var context = new Veb_portal_za_aukcijsku_prodaju.Models.AukcijaEntities())
                                             {
                                                 var allOrders = context.Narudzbinas.Where(n => n.KorisnikID == Model.KorisnikID);
+                                                allOrders.OrderByDescending(n => n.DatumPravljenja);
 
                                                 if (allOrders != null)
                                                 {

@@ -11,6 +11,11 @@
     if ((double)Model.CenaPaketa == 10.0) { paket = "PLATINUM"; }
 }
 
+@if (Session["userID"] != null)
+{
+    <input type="hidden" id="userIDLabel" value="@Session["userID"]" />
+}  
+
 <h2>@ViewBag.Title</h2>
 
 <!-- product category -->

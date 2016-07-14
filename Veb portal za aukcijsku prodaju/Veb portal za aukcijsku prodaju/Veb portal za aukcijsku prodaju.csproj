@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A7B40C9B-5AE5-4FE4-ACAA-7BD27DB7816C}</ProjectGuid>
+    <ProjectGuid>{36F32605-3A93-49F9-A937-4FC2597DE430}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -20,7 +20,6 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <ApplicationInsightsResourceId>/subscriptions/968b9ee9-28f3-4358-a525-53377f80d542/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/Veb portal za aukcijsku prodaju</ApplicationInsightsResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,32 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -281,30 +260,9 @@
     <Content Include="Content\img\client-brand-jquery.png" />
     <Content Include="Content\img\client-brand-wordpress.png" />
     <Content Include="Content\img\close-icon.png" />
-    <Content Include="Content\img\electronics\electronic-1.png" />
-    <Content Include="Content\img\electronics\electronic-2.png" />
-    <Content Include="Content\img\electronics\electronic-3.png" />
-    <Content Include="Content\img\electronics\electronic-4.png" />
-    <Content Include="Content\img\electronics\electronic-5.png" />
-    <Content Include="Content\img\electronics\electronic-6.png" />
-    <Content Include="Content\img\electronics\electronic-7.png" />
-    <Content Include="Content\img\electronics\electronic-8.png" />
     <Content Include="Content\img\fashion-banner.jpg" />
-    <Content Include="Content\img\fashion\1.jpg" />
-    <Content Include="Content\img\fashion\2.jpg" />
-    <Content Include="Content\img\fashion\3.jpg" />
-    <Content Include="Content\img\fashion\4.jpg" />
-    <Content Include="Content\img\fashion\5.jpg" />
-    <Content Include="Content\img\fashion\fashion-header-bg-8.jpg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\man-small-1.jpg" />
-    <Content Include="Content\img\man\polo-shirt-1.png" />
-    <Content Include="Content\img\man\polo-shirt-2.png" />
-    <Content Include="Content\img\man\polo-shirt-3.png" />
-    <Content Include="Content\img\man\polo-shirt-4.png" />
-    <Content Include="Content\img\man\polo-shirt-5.png" />
-    <Content Include="Content\img\man\polo-shirt-6.png" />
-    <Content Include="Content\img\man\t-shirt-1.png" />
     <Content Include="Content\img\paypal.jpg" />
     <Content Include="Content\img\Pre-Retina-1.png" />
     <Content Include="Content\img\promo-banner-1.jpg" />
@@ -312,50 +270,12 @@
     <Content Include="Content\img\promo-banner-3.jpg" />
     <Content Include="Content\img\promo-banner-4.jpg" />
     <Content Include="Content\img\promo-banner-5.jpg" />
-    <Content Include="Content\img\slider\1.jpg" />
-    <Content Include="Content\img\slider\2.jpg" />
-    <Content Include="Content\img\slider\3.jpg" />
-    <Content Include="Content\img\slider\4.jpg" />
-    <Content Include="Content\img\slider\5.jpg" />
-    <Content Include="Content\img\slider\ajax-loader.gif" />
-    <Content Include="Content\img\slider\bt-next%402x.png" />
-    <Content Include="Content\img\slider\bt-next.png" />
-    <Content Include="Content\img\slider\bt-prev%402x.png" />
-    <Content Include="Content\img\slider\bt-prev.png" />
-    <Content Include="Content\img\sports\sport-1.png" />
-    <Content Include="Content\img\sports\sport-2.png" />
-    <Content Include="Content\img\sports\sport-3.png" />
-    <Content Include="Content\img\sports\sport-4.png" />
-    <Content Include="Content\img\sports\sport-5.png" />
-    <Content Include="Content\img\sports\sport-6.png" />
-    <Content Include="Content\img\sports\sport-7.png" />
-    <Content Include="Content\img\sports\sport-8.png" />
     <Content Include="Content\img\testimonial-bg-1.jpg" />
     <Content Include="Content\img\testimonial-img-1.jpg" />
     <Content Include="Content\img\testimonial-img-2.jpg" />
     <Content Include="Content\img\testimonial-img-3.jpg" />
-    <Content Include="Content\img\view-slider\large\polo-shirt-1.png" />
-    <Content Include="Content\img\view-slider\large\polo-shirt-2.png" />
-    <Content Include="Content\img\view-slider\large\polo-shirt-3.png" />
-    <Content Include="Content\img\view-slider\large\polo-shirt-4.png" />
-    <Content Include="Content\img\view-slider\loading.gif" />
-    <Content Include="Content\img\view-slider\medium\polo-shirt-1.png" />
-    <Content Include="Content\img\view-slider\medium\polo-shirt-2.png" />
-    <Content Include="Content\img\view-slider\medium\polo-shirt-3.png" />
-    <Content Include="Content\img\view-slider\medium\polo-shirt-4.png" />
-    <Content Include="Content\img\view-slider\thumbnail\polo-shirt-1.png" />
-    <Content Include="Content\img\view-slider\thumbnail\polo-shirt-2.png" />
-    <Content Include="Content\img\view-slider\thumbnail\polo-shirt-3.png" />
-    <Content Include="Content\img\view-slider\thumbnail\polo-shirt-4.png" />
     <Content Include="Content\img\woman-small-1.jpg" />
     <Content Include="Content\img\woman-small-2.jpg" />
-    <Content Include="Content\img\women\girl-1.png" />
-    <Content Include="Content\img\women\girl-2.png" />
-    <Content Include="Content\img\women\girl-3.png" />
-    <Content Include="Content\img\women\girl-4.png" />
-    <Content Include="Content\img\women\girl-5.png" />
-    <Content Include="Content\img\women\girl-6.png" />
-    <Content Include="Content\img\women\girl-7.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -369,9 +289,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WebPortalDBModel.edmx</DependentUpon>
       <LastGenOutput>WebPortalDBModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EntityDeploy Include="Models\WebPortalDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -419,12 +336,12 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -436,42 +353,22 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Account\ViewProfile.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\ViewProfile.cshtml" />
     <Content Include="Views\Admin\AddAuction.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\AllAukcijas\Create.cshtml" />
-    <Content Include="Views\AllAukcijas\Delete.cshtml" />
-    <Content Include="Views\AllAukcijas\Details.cshtml" />
-    <Content Include="Views\AllAukcijas\Edit.cshtml" />
-    <Content Include="Views\AllAukcijas\Index.cshtml" />
-    <Content Include="Views\AllBids\Create.cshtml" />
-    <Content Include="Views\AllBids\Delete.cshtml" />
-    <Content Include="Views\AllBids\Details.cshtml" />
-    <Content Include="Views\AllBids\Edit.cshtml" />
-    <Content Include="Views\AllBids\Index.cshtml" />
-    <Content Include="Views\AllKorisniks\Create.cshtml" />
-    <Content Include="Views\AllKorisniks\Delete.cshtml" />
-    <Content Include="Views\AllKorisniks\Details.cshtml" />
-    <Content Include="Views\AllKorisniks\Edit.cshtml" />
-    <Content Include="Views\AllKorisniks\Index.cshtml" />
-    <Content Include="Views\AllNarudzbinas\Create.cshtml" />
-    <Content Include="Views\AllNarudzbinas\Delete.cshtml" />
-    <Content Include="Views\AllNarudzbinas\Details.cshtml" />
-    <Content Include="Views\AllNarudzbinas\Edit.cshtml" />
-    <Content Include="Views\AllNarudzbinas\Index.cshtml" />
-    <Content Include="Views\Auction\Index.cshtml" />
     <Content Include="Views\Auction\AllAuctions.cshtml" />
-    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Auction\Index.cshtml" />
     <Content Include="Views\Order\AllOrders.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -503,7 +400,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50997</DevelopmentServerPort>
+          <DevelopmentServerPort>49881</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:64254/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
