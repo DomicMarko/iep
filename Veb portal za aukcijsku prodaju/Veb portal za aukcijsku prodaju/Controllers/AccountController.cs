@@ -90,8 +90,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
-        {
-            string s = Base64Encode("MadafakA");
+        {            
             if (returnUrl != null)
                 if (returnUrl.Equals("/Account/LogOff"))
                 {

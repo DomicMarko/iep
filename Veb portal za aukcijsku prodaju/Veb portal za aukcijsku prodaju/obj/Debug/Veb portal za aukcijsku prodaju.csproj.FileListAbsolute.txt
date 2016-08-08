@@ -64,4 +64,3 @@ D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb 
 D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\obj\Debug\Veb portal za aukcijsku prodaju.pdb
 D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\log4net.dll
 D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\bin\log4net.xml
-D:\Faks\6. Semestar\IEP\Projekat\Aplikacija\Veb portal za aukcijsku prodaju\Veb portal za aukcijsku prodaju\obj\Debug\Veb portal za aukcijsku prodaju.csprojResolveAssemblyReference.cache

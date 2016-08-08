@@ -36,7 +36,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 
             using (var context = new AukcijaEntities())
             {
-
+                // NE DIRAJ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 ViewBag.CurrentSort = sortOrder;
                 ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
                 ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
@@ -52,9 +52,9 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 
                 ViewBag.CurrentFilter = searchString;
 
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
-                IEnumerable<Veb_portal_za_aukcijsku_prodaju.Models.Aukcija> aukcijas;
+                IEnumerable<Aukcija> aukcijas;
 
                 if (allOrNot == true)
                     aukcijas = context.Aukcijas.Include(a => a.Bid).Where(a => !a.Status.Equals("DRAFT"));
@@ -135,7 +135,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 
                     }
                 }
-
+                 // NE RADII!!!!!!!!!
                 switch (sortOrder)
                 {
                     case "name_desc":
@@ -188,7 +188,7 @@ namespace Veb_portal_za_aukcijsku_prodaju.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Your application description page.";            
 
             return View();
         }

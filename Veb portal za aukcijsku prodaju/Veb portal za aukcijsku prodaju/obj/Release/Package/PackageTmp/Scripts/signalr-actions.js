@@ -150,22 +150,30 @@
 
         stream.client.auctionOpened = function (auctionID, str) {
             
-            $('#admin-wrapper').css('display', 'none');
-            $('#user-wrapper').css('display', 'inline');
+            var adminWrapper = '#admin-wrapper-' + auctionID;
+            var userWrapper = '#user-wrapper-' + auctionID;
+
+            $(adminWrapper).css('display', 'none');
+            $(userWrapper).css('display', 'inline');
             
             var btnID = '#' + auctionID + '_btn';
             $(btnID).css('display' , 'inline');
             
             var statusID = '#' + auctionID + '_status'; 
             $(statusID).text('OPEN');
-  
+            $(statusID).removeClass().addClass('aa-badge aa-sale');
+
             var timeID = auctionID + "_time";
-            var obj = document.getElementById(timeID);
+            var obj = document.getElementById(timeID);                                          
   
+            /*
             endCalc = Date.now();            
             if (startCalc == -1) startCalc = str;
                         
             loadTime = (endCalc - startCalc) / 1000;
+            */
+
+            loadTime = str;
             startTimer(obj, true);
 
             startCalc = -1;            
@@ -175,6 +183,8 @@
         stream.client.auctionStatusChangedOver = function (auctionID, newStatus) {
 
             var badgeClass;
+            var adminWrapper = '#admin-wrapper-' + auctionID;
+            var userWrapper = '#user-wrapper-' + auctionID;
 
             switch (newStatus) {
                 case ("OPEN"):
@@ -188,8 +198,8 @@
                     break;
             }
 
-            $('#admin-wrapper').css('display', 'none');
-            $('#user-wrapper').css('display', 'none');
+            $(adminWrapper).css('display', 'none');
+            $(userWrapper).css('display', 'none');
 
             var statusID = '#' + auctionID + '_status';
             var buttonID = '#' + auctionID + '_btn';

@@ -40,10 +40,12 @@ namespace Veb_portal_za_aukcijsku_prodaju.Hubs
 
         public void ActivateAuction(string auctionID, double startCalc)
         {
+            DateTime start = DateTime.Now;
 
             new HelpMethods().OpenAuction(Int32.Parse(auctionID));
 
-            Clients.All.auctionOpened(auctionID, startCalc);                       
+            double remaining = (DateTime.Now - start).TotalSeconds;
+            Clients.All.auctionOpened(auctionID, remaining);                       
         }
 
         public void ChangeAuctionStatusOver(string auctionID)

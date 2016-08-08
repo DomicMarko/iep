@@ -9,6 +9,8 @@
     string tableID = Model.AukcijaID + "_table";
     string timeID = Model.AukcijaID + "_time";
     string bidBtnID = Model.AukcijaID + "_btn";
+    string adminWrapper = "admin-wrapper-" + Model.AukcijaID;
+    string userWrapper = "user-wrapper-" + Model.AukcijaID;        
     var topBids = Model.Top10Bids;
     bool logedinUser = false;
     bool cond = true;
@@ -117,13 +119,13 @@
                                     <div class="aa-prod-view-bottom">
                                         @if (cond)
                                         {
-                                            <div id="user-wrapper" style="@styleUser">
+                                            <div id="@userWrapper" style="@styleUser">
                                                 <a class="aa-add-cart-btn bidBtn" data-value="@Model.AukcijaID" id="@bidBtnID" href="#">Bid</a>
                                             </div>
                                         }
                                         else
                                         {
-                                            <div id="admin-wrapper" style="@styleAdmin">
+                                            <div id="@adminWrapper" style="@styleAdmin">
                                                 <button class="aa-add-to-cart-btn" data-value="@Model.AukcijaID" id="activateAuction">Aktiviraj</button>
                                                 @Html.ActionLink("Obriši aukciju", "Delete", "Auction", new { id = Model.AukcijaID }, new { @class = "aa-add-to-cart-btn" })
                                                 <div class="aa-search-box">
